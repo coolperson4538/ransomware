@@ -21,6 +21,11 @@ void lol()
         ShellExecute()
 }
 
+void infect()
+{
+        
+}
+
 void disable_cmdpromt()
 {
         // Work in progress
