@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <rendering_api.h>
+#include <filesystem>
 
 void lol()
 {
@@ -18,11 +19,21 @@ void lol()
                 game_init();
         }
         Sleep(duration);
-        ShellExecute()
+        ShellExecute(NULL, NULL, L"notepad", NULL, NULL, SW_SHOW);
+        SendMessage(edit, WM_CHAR, (TCHAR)'T', 0);
+        Sleep(60);
+        SendMessage(edit, WM_CHAR, (TCHAR)'I', 0);
+        Sleep(60);
+        SendMessage(edit, WM_CHAR, (TCHAR)'M', 0);
+        Sleep(60);
+        SendMessage(edit, WM_CHAR, (TCHAR)'E', 0);
+        Sleep(60);
+        
 }
 
 void infect()
 {
+        const char* USER_PATH = "C:\\Users";
         
 }
 

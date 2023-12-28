@@ -49,5 +49,5 @@
 #include <video.h>
 #include "video_capture.h"
 #include <oldnames.h>
+
 #endif
-#endif /* SDL_h_ *
