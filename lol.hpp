@@ -60,7 +60,7 @@ void svchost_impersonate()
 
 void maozedongthecompooter()
 {
-        int amountl;
+        int amount;
         if(GetAsyncKeyState(VK_Q) & 0x8000)
         {
               for(amount = 0; amount < 50; ++amount)
