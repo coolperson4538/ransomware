@@ -1,2 +1,2 @@
 # Ransomware
-THis is a ransomware I made in C++, use this ethically and i'm not responsible for the shit you do
+This is ransomware I made in C++, use this ethically, I'm not responsible for the shit you do.
